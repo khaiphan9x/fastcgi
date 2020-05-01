@@ -2,7 +2,7 @@
     "name": "khaiphan9x/fastcgi",
     "description": "FastCGI Client implementation for PHP",
     "keywords": ["fastcgi", "fpm", "php-fpm"],
-    "homepage": "http://www.github.com/ebernhardson/fastcgi/",
+    "homepage": "http://www.github.com/khaiphan9x/fastcgi/",
     "authors": [
         {
             "name": "Pierrick Charron",
