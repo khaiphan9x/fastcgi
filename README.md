@@ -12,7 +12,7 @@ FastCGI daemoni like php-fpm.
 
 ## Installation
     
-    $ composer require ebernhardson/fastcgi
+    $ composer require khaiphan9x/fastcgi
 
 ## Usage
 
@@ -22,7 +22,7 @@ The client supports either tcp:
 
 Or unix sockets:
 
-    $client = new \EBernhardson\FastCGI\Client('/var/run/php5-fpm.sock');
+    $client = new \EBernhardson\FastCGI\Client('/var/run/php7-fpm.sock');
 
 
 A FastCGI request is made using an array of environment parameters and a string
@@ -151,6 +151,8 @@ Http headers are sent prefixed with HTTP_.
     array(4) {
       ["statusCode"]=>
       int(404)
+      ["statusBody"]=>
+      string(2) "OK"
       ["headers"]=>
       array(3) {
         ["status"]=>
@@ -172,6 +174,8 @@ Http headers are sent prefixed with HTTP_.
     array(4) {
       ["statusCode"]=>
       int(200)
+      ["statusBody"]=>
+      string(2) "OK"
       ["headers"]=>
       array(3) {
         ["x-powered-by"]=>

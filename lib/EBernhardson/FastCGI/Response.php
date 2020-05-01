@@ -94,9 +94,10 @@ class Response
     private static function formatResponse($stdout, $stderr)
     {
         $code     = 200;
+        $statusBody = 'OK';
         $headers  = [
             // An empty status means 200 OK, so initialize with defaults
-            'status' => '200 OK',
+            //'Status' => '200 OK',
         ];
 
         // HTTP uses 2 CR/NL's to separate body from header
@@ -115,18 +116,19 @@ class Response
                 if (preg_match('/([\w-]+):\s*(.*)$/', $line, $matches)) {
 
                     // Normalize header name/value
-                    $headerName  = strtolower($matches[1]);
+                    $headerName  = $matches[1];
                     $headerValue = trim($matches[2]);
 
                     // HTTP Status (will frequently only be found non-200)
-                    if ($headerName === 'status') {
-                        $headers['status'] = $headerValue;
+                    if ($headerName === 'Status') {
+                        //$headers['Status'] = $headerValue;
 
                         // Extract the number from the rest of the message
                         $pos  = strpos($headerValue, ' ') ;
                         $code = $pos > 0
                             ? (int) substr($headerValue, 0, $pos)
                             : (int) $headerValue;
+                        $statusBody = preg_replace('/^[0-9]+\s/', '', $headerValue);
 
                         // Skip re-setting
                         continue;
@@ -147,9 +149,10 @@ class Response
 
         return array(
             'statusCode' => $code,
+            'statusBody' => $statusBody,
             'headers'    => $headers,
             'body'       => $stdout,
-            'stderr'     => $stderr,
+            'stdErr'     => $stderr,
         );
     }
 }
